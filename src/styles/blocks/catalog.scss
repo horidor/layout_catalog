@@ -1,0 +1,25 @@
+@import 'vars';
+
+@mixin responsive-columns($breakpoints...) {
+  @each $columns, $breakpoint in $breakpoints {
+    @media (max-width: $breakpoint) {
+      grid-template-columns: repeat($columns, $card-width);
+    }
+  }
+}
+
+.catalog {
+  $column-count: 4;
+
+  display: grid;
+  justify-content: center;
+  padding: 50px 40px;
+  grid-template-columns: repeat(4, 200px);
+  gap: 46px 48px;
+
+  @include responsive-columns(
+    (3, $big-screen-width - 1),
+    (2, $small-screen-width - 1),
+    (1, $tablet-screen-width - 1)
+  );
+}
