@@ -1,6 +1,11 @@
 @import 'vars';
 
-@mixin responsive-columns($breakpoints...) {
+$breakpoint-big: $big-screen-width-min - 1;
+$breakpoint-small: $small-screen-width-min - 1;
+$breakpoint-tablet: $tablet-screen-width-min - 1;
+$grid-breakpoints: (3: $breakpoint-big, 2: $breakpoint-small, 1: $breakpoint-tablet);
+
+@mixin responsive-columns($breakpoints) {
   @each $columns, $breakpoint in $breakpoints {
     @media (max-width: $breakpoint) {
       grid-template-columns: repeat($columns, $card-width);
@@ -17,9 +22,5 @@
   grid-template-columns: repeat(4, 200px);
   gap: 46px 48px;
 
-  @include responsive-columns(
-    (3, $big-screen-width - 1),
-    (2, $small-screen-width - 1),
-    (1, $tablet-screen-width - 1)
-  );
+  @include responsive-columns($grid-breakpoints);
 }
